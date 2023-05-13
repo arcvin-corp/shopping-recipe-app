@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe.model';
 
 @Component({
@@ -14,16 +14,18 @@ export class RecipeListComponent {
       'https://www.sharmispassions.com/wp-content/uploads/2020/03/WhiteSaucePasta5-1.jpg'
     ),
     new Recipe(
-      'Pasta',
+      'Noodles',
       'This is a great alfredo sauce pasta',
       'https://www.sharmispassions.com/wp-content/uploads/2020/03/WhiteSaucePasta5-1.jpg'
     ),
     new Recipe(
-      'Pasta',
+      'Drunken Chicken',
       'This is a great alfredo sauce pasta',
       'https://www.sharmispassions.com/wp-content/uploads/2020/03/WhiteSaucePasta5-1.jpg'
     ),
   ];
+
+  selectedRecipe: Recipe;
 
   getStatus() {
     return true;

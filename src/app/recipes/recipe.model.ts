@@ -1,4 +1,4 @@
-interface RecipeData {
+export interface RecipeData {
   name: string;
   description: string;
   imagePath: string;
