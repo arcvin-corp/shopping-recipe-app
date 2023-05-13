@@ -15,11 +15,21 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Recipes</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="#"
+            (click)="onShowRecipesClick()"
+            >Recipes</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Shopping List</a>
+          <a class="nav-link" href="#" (click)="onShowShoppingListClick()"
+            >Shopping List</a
+          >
         </li>
+      </ul>
+      <ul class="navbar-nav ml-auto mb-lg-0 mb-2 me-4">
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -27,19 +37,20 @@
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-          >
-            Manage
+            ><span><i class="bi bi-person-fill"></i></span> Profile
           </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="#">Action </a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Support</a></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </div>
+            <li>
+              <a class="dropdown-item" href="#"
+                ><span><i class="bi bi-box-arrow-left"></i></span> Logout</a
+              >
+            </li>
+          </ul>
         </li>
       </ul>
-
-      <!-- <ul class="navbar-nav navbar-right"></ul> -->
     </div>
   </div>
 </nav>
