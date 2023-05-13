@@ -1,0 +1,16 @@
+<div
+  *ngIf="alert.level <= alertLevels.DEBUG"
+  class="alert border-0 alert-dismissible fade show"
+  role="alert"
+  [ngClass]="getLogLevelClass()"
+>
+  {{ alert.content }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+    [ngClass]="{ 'btn-close-white': alert.level > alertLevels.WARN }"
+    (click)="onCloseClick()"
+  ></button>
+</div>

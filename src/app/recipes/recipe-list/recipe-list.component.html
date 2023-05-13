@@ -9,10 +9,12 @@
 <hr />
 <div class="row">
   <div class="col-xs-12">
-    <app-recipe-item
-      *ngFor="let recipeElement of recipes"
-      [recipe]="recipeElement"
-      (selectedRecipe)="selectedRecipe = $event"
-    ></app-recipe-item>
+    <div class="list-group gap-3">
+      <app-recipe-item
+        *ngFor="let recipeElement of recipes"
+        [recipe]="recipeElement"
+        (selectedRecipe)="passSelectedRecipe(recipeElement)"
+      ></app-recipe-item>
+    </div>
   </div>
 </div>

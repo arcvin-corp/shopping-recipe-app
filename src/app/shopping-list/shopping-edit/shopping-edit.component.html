@@ -1,18 +1,28 @@
+<app-alerts
+  *ngIf="isVisible"
+  [alert]="alert"
+  (closeAlertEvent)="closeAlert()"
+></app-alerts>
 <form>
   <div class="row">
     <div class="col-md-5 col-12">
       <label for="ingredientName" class="form-label">Ingredient Name</label>
-      <input type="text" class="form-control" id="ingredientName" />
+      <input type="text" class="form-control" id="ingredientName" #nameInput />
     </div>
     <div class="col-md-2 col-4">
       <div class="mb-3">
         <label for="quantityInput" class="form-label">Quantity</label>
-        <input type="number" class="form-control" id="quantityInput" />
+        <input
+          type="number"
+          class="form-control"
+          id="quantityInput"
+          #quantityInput
+        />
       </div>
     </div>
   </div>
-  <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-    <button type="button" class="btn btn-success">
+  <div class="btn-group" role="group" aria-label="Add, Delete, Reset buttons">
+    <button type="button" class="btn btn-success" (click)="onClickAdd()">
       <span><i class="bi bi-plus-square-fill"></i></span> Add
     </button>
     <button type="button" class="btn btn-danger">
