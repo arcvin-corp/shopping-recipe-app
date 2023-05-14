@@ -34,16 +34,21 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto mb-lg-0 mb-2 me-4">
-        <li class="nav-item dropdown">
+        <li
+          [targetElementId]="'profileDropDown'"
+          [anchorElementId]="'profileDropDownLink'"
+          appDropdown
+          class="nav-item dropdown"
+        >
           <a
+            id="profileDropDownLink"
             class="nav-link dropdown-toggle"
             href="#"
             role="button"
-            data-bs-toggle="dropdown"
             aria-expanded="false"
             ><span><i class="bi bi-person-fill"></i></span> Profile
           </a>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu dropdown-menu-end" id="profileDropDown">
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="#">Support</a></li>
             <li><hr class="dropdown-divider" /></li>
