@@ -11,30 +11,55 @@ import {
 })
 export class DropdownDirective implements OnInit {
   @Input() targetElementId: string;
-  @Input() anchorElementId: string;
-  parentElement: HTMLElement;
+  @Input() markActiveElementID: string;
+
+  element: HTMLElement;
   targetElement: HTMLElement;
-  anchorElement: HTMLAnchorElement;
+  markActiveElement: HTMLElement;
 
-  constructor(private elRef: ElementRef) {
-    this.parentElement = elRef.nativeElement;
-  }
+  constructor(private elRef: ElementRef) {}
 
-  ngOnInit() {
-    this.getElements();
-  }
-
-  getElements() {
-    this.targetElement = this.parentElement.querySelector(
-      `#${this.targetElementId}`
-    );
-    this.anchorElement = this.parentElement.querySelector(
-      `#${this.anchorElementId}`
+  ngOnInit(): void {
+    this.element = this.elRef.nativeElement;
+    this.targetElement = this.element.querySelector(`#${this.targetElementId}`);
+    this.markActiveElement = this.element.querySelector(
+      `#${this.markActiveElementID}`
     );
   }
 
-  @HostListener('click') openDropdown() {
+  toggleDropDown() {
     this.targetElement && this.targetElement.classList.toggle('show');
-    this.anchorElement && this.anchorElement.classList.toggle('active');
+    this.markActiveElement && this.markActiveElement.classList.toggle('active');
+  }
+
+  closeDropDown() {
+    this.targetElement && this.targetElement.classList.remove('show');
+    this.markActiveElement && this.markActiveElement.classList.remove('active');
+  }
+
+  @HostListener('click', ['$event.target.id']) onClick(targetId: string) {
+    if (
+      targetId === this.markActiveElementID ||
+      targetId === this.targetElementId
+    ) {
+      this.toggleDropDown();
+    }
+  }
+
+  @HostListener('window:click', ['$event.target.id']) onWindowClick(
+    targetId: string
+  ) {
+    if (
+      targetId !== this.markActiveElementID &&
+      targetId !== this.targetElementId
+    ) {
+      this.closeDropDown();
+    }
+  }
+
+  @HostListener('window:keyup', ['$event']) onEscapeKeyPress(
+    keyEvent: KeyboardEvent
+  ) {
+    keyEvent.key === 'Escape' ? this.closeDropDown() : null;
   }
 }

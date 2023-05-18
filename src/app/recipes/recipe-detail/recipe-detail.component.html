@@ -11,15 +11,21 @@
     <h1>{{ recipeDetails.name }}</h1>
   </div>
   <div class="col-xs-12">
-    <div appDropdown [targetElementId]="'manageRecipe'" class="dropdown">
+    <div
+      appDropdown
+      [targetElementId]="'manageRecipe'"
+      [markActiveElementID]="'mRecipeDropDownButton'"
+      class="dropdown"
+    >
       <button
+        id="mRecipeDropDownButton"
         class="btn btn-primary dropdown-toggle"
         type="button"
         aria-expanded="false"
       >
         <span><i class="bi bi-gear-wide-connected"></i></span> Manage
       </button>
-      <ul id="manageRecipe" class="dropdown-menu" data-bs-theme="dark">
+      <ul id="manageRecipe" class="dropdown-menu show" data-bs-theme="dark">
         <li><a href="#" class="dropdown-item">+ Shopping List</a></li>
         <li><a href="#" class="dropdown-item">Edit Recipe</a></li>
         <li><a href="#" class="dropdown-item">Delete Recipe</a></li>

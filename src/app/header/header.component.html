@@ -33,13 +33,13 @@
           >
         </li>
       </ul>
-      <ul class="navbar-nav ml-auto mb-lg-0 mb-2 me-4">
-        <li
-          [targetElementId]="'profileDropDown'"
-          [anchorElementId]="'profileDropDownLink'"
-          appDropdown
-          class="nav-item dropdown"
-        >
+      <ul
+        appDropdown
+        [targetElementId]="'profileDropDown'"
+        [markActiveElementID]="'profileDropDownLink'"
+        class="navbar-nav ml-auto mb-lg-0 mb-2 me-4"
+      >
+        <li class="nav-item dropdown">
           <a
             id="profileDropDownLink"
             class="nav-link dropdown-toggle"
