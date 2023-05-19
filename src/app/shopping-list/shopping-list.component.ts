@@ -1,19 +1,23 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { Alert, AlertLevels } from '../shared/alerts.model';
+import { ShoppingListService } from './shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css'],
 })
-export class ShoppingListComponent {
-  ingredients: Ingredient[] = [
-    new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 3),
-  ];
+export class ShoppingListComponent implements OnInit {
+  ingredients: Ingredient[];
   alert: Alert;
   isVisible = false;
+
+  constructor(private shoppingListService: ShoppingListService) {}
+
+  ngOnInit(): void {
+    this.ingredients = this.shoppingListService.getIngredients();
+  }
 
   addIngredient(ingredient: Ingredient): void {
     let ingredientName = ingredient.name.toLocaleLowerCase().trim();
@@ -27,7 +31,8 @@ export class ShoppingListComponent {
       );
     } else {
       this.isVisible = false;
-      this.ingredients.push(ingredient);
+      this.shoppingListService.addIngredient(ingredient);
+      this.ingredients = this.shoppingListService.getIngredients();
     }
   }
 
