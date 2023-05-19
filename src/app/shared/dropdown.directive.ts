@@ -60,6 +60,6 @@ export class DropdownDirective implements OnInit {
   @HostListener('window:keyup', ['$event']) onEscapeKeyPress(
     keyEvent: KeyboardEvent
   ) {
-    keyEvent.key === 'Escape' ? this.closeDropDown() : null;
+    keyEvent.key === 'Escape' && this.closeDropDown();
   }
 }
