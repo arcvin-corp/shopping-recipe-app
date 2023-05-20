@@ -13,6 +13,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { FormsModule } from '@angular/forms';
 import { AlertsComponent } from './alerts/alerts.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { ListItemDirective } from './shared/list-item.directive';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
     ShoppingEditComponent,
     AlertsComponent,
     DropdownDirective,
+    ListItemDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

@@ -7,6 +7,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class HeaderComponent {
   recipeNavActive: boolean = true;
   shoppingListNavActive: boolean = false;
+  toggleNav: boolean = false;
   @Output() showRecipesEvent = new EventEmitter<boolean>();
   @Output() showShoppingListEvent = new EventEmitter<boolean>();
 

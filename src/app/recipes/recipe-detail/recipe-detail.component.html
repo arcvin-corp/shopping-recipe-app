@@ -26,12 +26,44 @@
         <span><i class="bi bi-gear-wide-connected"></i></span> Manage
       </button>
       <ul id="manageRecipe" class="dropdown-menu show" data-bs-theme="dark">
-        <li><a href="#" class="dropdown-item">+ Shopping List</a></li>
+        <li>
+          <a (click)="addIngToShoppingList()" href="#" class="dropdown-item"
+            >+ Shopping List</a
+          >
+        </li>
         <li><a href="#" class="dropdown-item">Edit Recipe</a></li>
         <li><a href="#" class="dropdown-item">Delete Recipe</a></li>
       </ul>
     </div>
   </div>
   <div class="col-xs-12">{{ recipeDetails.description }}</div>
-  <div class="col-xs-12">Ingredients</div>
+  <div class="col-xs-12 mt-3">
+    <div class="form-check ms-1 mb-1">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id="selectAllIng"
+        (click)="onSelectAll()"
+      />
+      <label class="form-check-label" for="selectAllIng"> Select All </label>
+      <ul class="list-group">
+        <a
+          appListItem
+          class="list-group-item list-group-item-action"
+          *ngFor="let ingredient of recipeDetails.ingredients"
+          (click)="selectIngredient(ingredient, isAllSelected)"
+          ><input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            aria-label="Checkbox for following text input"
+            [checked]="isAllSelected"
+          /><span class="ms-2"
+            >{{ ingredient.name }} ({{ ingredient.amount }})</span
+          ></a
+        >
+      </ul>
+    </div>
+  </div>
 </div>

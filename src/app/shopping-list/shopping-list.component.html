@@ -1,13 +1,6 @@
 <div class="row py-4">
-  <app-alerts
-    *ngIf="isVisible"
-    [alert]="alert"
-    (closeAlertEvent)="closeAlert()"
-  ></app-alerts>
   <div class="col-md-12">
-    <app-shopping-edit
-      (newIngredientEvent)="addIngredient($event)"
-    ></app-shopping-edit>
+    <app-shopping-edit></app-shopping-edit>
     <hr />
     <ul class="list-group">
       <a

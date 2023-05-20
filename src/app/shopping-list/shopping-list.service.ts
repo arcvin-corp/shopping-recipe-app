@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable({
@@ -9,6 +9,7 @@ export class ShoppingListService {
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 3),
   ];
+  @Output() ingredientsChanged: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {}
 
@@ -17,6 +18,14 @@ export class ShoppingListService {
   }
 
   addIngredient(ingredient: Ingredient) {
-    this.ingredients.push(ingredient);
+    const ingIdx = this.ingredients.findIndex(
+      (el) => el.name.toLowerCase() === ingredient.name.toLowerCase()
+    );
+    console.log(ingIdx);
+    ingIdx > -1
+      ? (this.ingredients[ingIdx].amount += ingredient.amount)
+      : this.ingredients.push(ingredient);
+
+    this.ingredientsChanged.emit(true);
   }
 }

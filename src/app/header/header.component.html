@@ -9,10 +9,15 @@
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation"
+      (click)="toggleNav = !toggleNav"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+      [class.show]="toggleNav"
+    >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a
@@ -48,7 +53,10 @@
             aria-expanded="false"
             ><span><i class="bi bi-person-fill"></i></span> Profile
           </a>
-          <ul class="dropdown-menu dropdown-menu-end" id="profileDropDown">
+          <ul
+            class="dropdown-menu dropdown-menu-end end-0"
+            id="profileDropDown"
+          >
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="#">Support</a></li>
             <li><hr class="dropdown-divider" /></li>
