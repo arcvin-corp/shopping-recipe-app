@@ -16,6 +16,7 @@
       [targetElementId]="'manageRecipe'"
       [markActiveElementID]="'mRecipeDropDownButton'"
       class="dropdown"
+      (click)="openManageDropDown()"
     >
       <button
         id="mRecipeDropDownButton"
@@ -27,7 +28,11 @@
       </button>
       <ul id="manageRecipe" class="dropdown-menu show" data-bs-theme="dark">
         <li>
-          <a (click)="addIngToShoppingList()" href="#" class="dropdown-item"
+          <a
+            (click)="addIngToShoppingList()"
+            href="#"
+            class="dropdown-item"
+            [ngClass]="{ disabled: isAddToShoppingListDisabled }"
             >+ Shopping List</a
           >
         </li>

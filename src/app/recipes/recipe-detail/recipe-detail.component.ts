@@ -23,6 +23,7 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
   selectAllCheckBoxEl: HTMLInputElement;
   selectedIngredients: Ingredient[] = [];
   isAllSelected: boolean = false;
+  isAddToShoppingListDisabled: boolean = true;
 
   constructor(private shoppingListService: ShoppingListService) {}
 
@@ -51,7 +52,8 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
 
     this.selectedIngredients.length === 0 &&
       ((this.selectAllCheckBoxEl.checked = false),
-      (this.isAllSelected = false));
+      (this.isAllSelected = false)),
+      (this.isAddToShoppingListDisabled = true);
 
     this.selectedIngredients.length === this.recipeDetails.ingredients.length &&
       (this.selectAllCheckBoxEl.checked = true);
@@ -71,6 +73,12 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
     } else {
       this.isAllSelected = false;
       this.selectedIngredients = [];
+      this.isAddToShoppingListDisabled = true;
     }
+  }
+
+  openManageDropDown() {
+    this.selectedIngredients.length > 0 &&
+      (this.isAddToShoppingListDisabled = false);
   }
 }
