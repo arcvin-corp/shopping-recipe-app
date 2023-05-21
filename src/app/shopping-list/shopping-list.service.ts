@@ -21,10 +21,10 @@ export class ShoppingListService {
     const ingIdx = this.ingredients.findIndex(
       (el) => el.name.toLowerCase() === ingredient.name.toLowerCase()
     );
-    console.log(ingIdx);
-    ingIdx > -1
-      ? (this.ingredients[ingIdx].amount += ingredient.amount)
-      : this.ingredients.push(ingredient);
+
+    if (ingIdx < 0) {
+      this.ingredients.push(ingredient);
+    }
 
     this.ingredientsChanged.emit(true);
   }
