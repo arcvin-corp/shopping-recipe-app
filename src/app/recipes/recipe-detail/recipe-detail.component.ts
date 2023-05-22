@@ -18,12 +18,12 @@ import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service
 })
 export class RecipeDetailComponent implements OnChanges, AfterViewInit {
   @Input() recipeDetails: Recipe;
-  @ViewChild('selectAllCheckBox') selectAllCheckBoxElRef: ElementRef;
-  selectAllCheckBoxId: string;
+  @ViewChild('selectAllCheckBox')
+  selectAllCheckBoxElRef: ElementRef<HTMLInputElement>;
   selectAllCheckBoxEl: HTMLInputElement;
   selectedIngredients: Ingredient[] = [];
-  isAllSelected: boolean = false;
-  isAddToShoppingListDisabled: boolean = true;
+  isAllSelected = false;
+  isAddToShoppingListDisabled = true;
 
   constructor(private shoppingListService: ShoppingListService) {}
 
@@ -41,33 +41,40 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  selectIngredient(ing: Ingredient) {
+  selectIngredient(ing: Ingredient): void {
     const indexValue = this.selectedIngredients.findIndex(
       (el) => el.name === ing.name
     );
 
-    indexValue < 0
-      ? this.selectedIngredients.push(ing)
-      : this.selectedIngredients.splice(indexValue, 1);
+    if (indexValue < 0) {
+      this.selectedIngredients.push(ing);
+    } else {
+      this.selectedIngredients.splice(indexValue, 1);
+    }
 
-    this.selectedIngredients.length === 0 &&
-      ((this.selectAllCheckBoxEl.checked = false),
-      (this.isAllSelected = false)),
-      (this.isAddToShoppingListDisabled = true);
+    this.selectedIngredients.length === 0
+      ? ((this.selectAllCheckBoxEl.checked = false),
+        (this.isAllSelected = false),
+        (this.isAddToShoppingListDisabled = true))
+      : (this.isAddToShoppingListDisabled = true);
 
     this.selectedIngredients.length === this.recipeDetails.ingredients.length &&
       (this.selectAllCheckBoxEl.checked = true);
+
+    this.selectedIngredients.length < this.recipeDetails.ingredients.length &&
+      (this.selectAllCheckBoxEl.checked = false);
+
     console.log('In Add Ing', this.selectedIngredients);
   }
 
-  addIngToShoppingList() {
+  addIngToShoppingList(): void {
     this.selectedIngredients.forEach((ing) =>
       this.shoppingListService.addIngredient(ing)
     );
   }
 
-  onSelectAll(e: Event) {
-    if ((<HTMLInputElement>e.target).checked) {
+  onSelectAll(e: Event): void {
+    if ((e.target as HTMLInputElement).checked) {
       this.isAllSelected = true;
       this.selectedIngredients = [...this.recipeDetails.ingredients];
     } else {
@@ -77,8 +84,7 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  openManageDropDown() {
-    this.selectedIngredients.length > 0 &&
-      (this.isAddToShoppingListDisabled = false);
+  openManageDropDown(): void {
+    this.isAddToShoppingListDisabled = this.selectedIngredients.length === 0;
   }
 }
