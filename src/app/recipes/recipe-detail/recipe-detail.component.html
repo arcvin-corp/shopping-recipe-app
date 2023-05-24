@@ -50,6 +50,7 @@
         type="checkbox"
         [id]="recipeDetails.name.trim().replaceAll(' ', '-').toLowerCase()"
         (click)="onSelectAll($event)"
+        [ngClass]="{ indeterminate: notAllSelected }"
       />
       <label
         class="form-check-label"

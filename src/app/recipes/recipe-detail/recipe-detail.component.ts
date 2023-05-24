@@ -24,6 +24,7 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
   selectedIngredients: Ingredient[] = [];
   isAllSelected = false;
   isAddToShoppingListDisabled = true;
+  notAllSelected: boolean = false;
 
   constructor(private shoppingListService: ShoppingListService) {}
 
@@ -33,11 +34,11 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes.recipeDetails.isFirstChange()) {
-      console.log('Data changed');
       this.selectAllCheckBoxEl = this.selectAllCheckBoxElRef.nativeElement;
       this.isAllSelected = false;
       this.selectAllCheckBoxEl.checked = false;
       this.selectedIngredients = [];
+      this.isAddToShoppingListDisabled = true;
     }
   }
 
@@ -52,17 +53,25 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
       this.selectedIngredients.splice(indexValue, 1);
     }
 
-    this.selectedIngredients.length === 0
-      ? ((this.selectAllCheckBoxEl.checked = false),
-        (this.isAllSelected = false),
-        (this.isAddToShoppingListDisabled = true))
-      : (this.isAddToShoppingListDisabled = true);
+    if (
+      this.selectedIngredients.length < this.recipeDetails.ingredients.length
+    ) {
+      if (this.selectedIngredients.length === 0) {
+        this.notAllSelected = false;
+        this.isAllSelected = false;
+        this.isAddToShoppingListDisabled = true;
+      } else {
+        this.selectAllCheckBoxEl.checked = false;
+        this.notAllSelected = true;
+      }
+    }
 
-    this.selectedIngredients.length === this.recipeDetails.ingredients.length &&
-      (this.selectAllCheckBoxEl.checked = true);
-
-    this.selectedIngredients.length < this.recipeDetails.ingredients.length &&
-      (this.selectAllCheckBoxEl.checked = false);
+    if (
+      this.selectedIngredients.length === this.recipeDetails.ingredients.length
+    ) {
+      this.selectAllCheckBoxEl.click();
+      this.notAllSelected = false;
+    }
   }
 
   addIngToShoppingList(): void {
@@ -70,6 +79,7 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
   }
 
   onSelectAll(e: Event): void {
+    console.log(this.notAllSelected);
     if ((e.target as HTMLInputElement).checked) {
       this.isAllSelected = true;
       this.selectedIngredients = [...this.recipeDetails.ingredients];
