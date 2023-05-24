@@ -63,14 +63,10 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
 
     this.selectedIngredients.length < this.recipeDetails.ingredients.length &&
       (this.selectAllCheckBoxEl.checked = false);
-
-    console.log('In Add Ing', this.selectedIngredients);
   }
 
   addIngToShoppingList(): void {
-    this.selectedIngredients.forEach((ing) =>
-      this.shoppingListService.addIngredient(ing)
-    );
+    this.shoppingListService.addIngredients(this.selectedIngredients);
   }
 
   onSelectAll(e: Event): void {

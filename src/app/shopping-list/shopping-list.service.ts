@@ -17,7 +17,7 @@ export class ShoppingListService {
     return [...this.ingredients];
   }
 
-  addIngredient(ingredient: Ingredient) {
+  addIngredient(ingredient: Ingredient, emitOnAdd: boolean = true) {
     const ingIdx = this.ingredients.findIndex(
       (el) => el.name.toLowerCase() === ingredient.name.toLowerCase()
     );
@@ -25,7 +25,13 @@ export class ShoppingListService {
     if (ingIdx < 0) {
       this.ingredients.push(ingredient);
     }
+    emitOnAdd && this.ingredientsChanged.emit(true);
+  }
 
+  addIngredients(ingredients: Ingredient[]) {
+    ingredients.forEach((ing) => {
+      this.addIngredient(ing, false);
+    });
     this.ingredientsChanged.emit(true);
   }
 }
