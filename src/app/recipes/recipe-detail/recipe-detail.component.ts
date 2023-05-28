@@ -2,22 +2,25 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
   OnChanges,
+  OnInit,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.css'],
 })
-export class RecipeDetailComponent implements OnChanges, AfterViewInit {
-  @Input() recipeDetails: Recipe;
+export class RecipeDetailComponent implements OnChanges, OnInit, AfterViewInit {
+  recipeDetails: Recipe;
+
   @ViewChild('selectAllCheckBox')
   selectAllCheckBoxElRef: ElementRef<HTMLInputElement>;
   selectAllCheckBoxEl: HTMLInputElement;
@@ -26,10 +29,29 @@ export class RecipeDetailComponent implements OnChanges, AfterViewInit {
   isAddToShoppingListDisabled = true;
   notAllSelected: boolean = false;
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private route: ActivatedRoute,
+    private recipeService: RecipeService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      let recipeId = +paramMap.get('id');
+      let recipeDetails = this.recipeService.getRecipe(recipeId);
+      if (!recipeDetails) {
+        this.router.navigate(['/page-not-found']);
+      } else {
+        this.recipeDetails = recipeDetails;
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
-    this.selectAllCheckBoxEl = this.selectAllCheckBoxElRef.nativeElement;
+    if (this.recipeDetails) {
+      this.selectAllCheckBoxEl = this.selectAllCheckBoxElRef.nativeElement;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {

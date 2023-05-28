@@ -14,6 +14,10 @@ import { FormsModule } from '@angular/forms';
 import { AlertsComponent } from './alerts/alerts.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { ListItemDirective } from './shared/list-item.directive';
+import { RecipeNotSelectedComponent } from './recipes/recipe-not-selected/recipe-not-selected.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
+import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,10 @@ import { ListItemDirective } from './shared/list-item.directive';
     AlertsComponent,
     DropdownDirective,
     ListItemDirective,
+    RecipeNotSelectedComponent,
+    PageNotFoundComponent,
+    NewRecipeComponent,
+    EditRecipeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

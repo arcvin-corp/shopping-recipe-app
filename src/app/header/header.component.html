@@ -20,20 +20,15 @@
     >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#"
-            (click)="onShowRecipesClick()"
-            [ngClass]="{ active: recipeNavActive }"
+          <a class="nav-link" routerLink="/recipes" routerLinkActive="active"
             >Recipes</a
           >
         </li>
         <li class="nav-item">
           <a
             class="nav-link"
-            href="#"
-            (click)="onShowShoppingListClick()"
-            [ngClass]="{ active: shoppingListNavActive }"
+            routerLink="shopping-list"
+            routerLinkActive="active"
             >Shopping List</a
           >
         </li>
@@ -48,7 +43,6 @@
           <a
             id="profileDropDownLink"
             class="nav-link dropdown-toggle"
-            href="#"
             role="button"
             aria-expanded="false"
             ><span><i class="bi bi-person-fill"></i></span> Profile
@@ -57,11 +51,11 @@
             class="dropdown-menu dropdown-menu-end end-0"
             id="profileDropDown"
           >
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Support</a></li>
+            <li><a class="dropdown-item">Settings</a></li>
+            <li><a class="dropdown-item">Support</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item" href="#"
+              <a class="dropdown-item"
                 ><span><i class="bi bi-box-arrow-left"></i></span> Logout</a
               >
             </li>
